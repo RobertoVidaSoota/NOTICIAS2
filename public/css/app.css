@@ -10307,3 +10307,28 @@ h3 {
 .small {
   font-size: 0.875rem !important;
 }
+
+.h_menu {
+  height: 110px;
+}
+
+.padding_menu {
+  padding: 40px;
+}
+
+.link_menu {
+  color: #fff;
+}
+
+.link_menu:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.link_noticia {
+  z-index: 10;
+}
+
+.link_noticia:hover {
+  text-decoration: underline;
+}

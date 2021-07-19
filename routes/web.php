@@ -24,38 +24,46 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
 
 // NOVO
 
-Route::get('/area-editor', function() {
-    return Inertia::render('AreaEditor', [
-        'canLogin' => Route::has('login')
-    ]);
-})->name('area-editor');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-// Route::get('/', function () {
-//     return Inertia::render('Inicio', [
-//         'canLogin' => Route::has('login')
-//     ]);
-// })->name('inicio');
+    Route::get('/dashboard', function(){
+        return Inertia::render('Dashboard');
+    })->name('dashboard');;
 
-Route::get('/discurcoes', function() {
-    return Inertia::render('Discurcoes', [
-        'canLogin' => Route::has('login')
-    ]);
-})->name('discurcoes');
+    Route::get('/area-editor', function() {
+        return Inertia::render('AreaEditor', [
+            'canLogin' => Route::has('login')
+        ]);
+    })->name('area-editor');
 
-Route::get('/assuntos', function () {
-    return Inertia::render('PrincipaisAssuntos', [
-        'canLogin' => Route::has('login')
-    ]);
-})->name('assuntos');
+    Route::get('/inicio', function () {
+        return Inertia::render('Inicio', [
+            'canLogin' => Route::has('login')
+        ]);
+    })->name('inicio');
 
-Route::get('/noticia-completa', function(){
-    return Inertia::render('NoticiaCompleta', [
-        'canLogin' => Route::has('login')
-    ]);
-})->name('completa');
+    Route::get('/discurcoes', function() {
+        return Inertia::render('Discurcoes', [
+            'canLogin' => Route::has('login')
+        ]);
+    })->name('discurcoes');
+
+    Route::get('/assuntos', function () {
+        return Inertia::render('PrincipaisAssuntos', [
+            'canLogin' => Route::has('login')
+        ]);
+    })->name('assuntos');
+
+    Route::get('/noticia-completa', function(){
+        return Inertia::render('NoticiaCompleta', [
+            'canLogin' => Route::has('login')
+        ]);
+    })->name('completa');
+
+});

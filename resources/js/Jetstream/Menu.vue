@@ -25,7 +25,7 @@
             </div>
 
             <!-- LINKS DINAMICOS DE AUTENTICAÇÃO -->
-            <div v-if="$page.props.user && nivel == 1" class="">
+            <div v-if="$page.props.user && $page.props.user.nivel_acesso == 1" class="">
                 <inertia-link :href="route('area-editor')" class=" p-5
                 text-decoration-none link_menu">
                 Area Editor
@@ -50,7 +50,7 @@
                 </inertia-link>
             </div>
 
-            <div v-if="$page.props.user" class="">
+            <div v-if="$page.props.user" class="ms-auto">
                 <inertia-link :href="route('inicio')" class=" p-5
                 text-decoration-none link_menu">
                 Sair de lola@gmail.com
