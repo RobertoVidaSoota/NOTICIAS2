@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nivel_acesso'
     ];
 
     /**
@@ -47,7 +48,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime'
     ];
 
     /**
@@ -58,4 +59,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function noticia()
+	{
+		return $this->hasMany(Noticia::class, 'fk_id_users');
+	}
 }
