@@ -36,11 +36,11 @@ Route::get('/area-editor', function() {
     ]);
 })->name('area-editor');
 
-Route::get('/', function () {
-    return Inertia::render('Inicio', [
-        'canLogin' => Route::has('login')
-    ]);
-})->name('inicio');
+// Route::get('/', function () {
+//     return Inertia::render('Inicio', [
+//         'canLogin' => Route::has('login')
+//     ]);
+// })->name('inicio');
 
 Route::get('/discurcoes', function() {
     return Inertia::render('Discurcoes', [
