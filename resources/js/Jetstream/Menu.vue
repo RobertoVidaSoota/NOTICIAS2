@@ -33,10 +33,8 @@
             </div>
 
             <div v-if="!$page.props.user" class="ms-auto">
-                <inertia-link href="#modal_login" class=" p-5
-                text-decoration-none link_menu"
-                data-bs-toggle="modal"
-                data-bs-target="#modal_login">
+                <inertia-link :href="route('entrar')" class=" p-5
+                text-decoration-none link_menu">
                 Logar
                 </inertia-link>
             </div>
@@ -50,24 +48,30 @@
                 </inertia-link>
             </div>
 
-            <div v-if="$page.props.user" class="ms-auto">
-                <inertia-link :href="route('inicio')" class=" p-5
-                text-decoration-none link_menu">
-                Sair de lola@gmail.com
-                </inertia-link>
+            <div v-if="$page.props.user" class="ms-auto box_btn_out">
+                <form @submit.prevent="logout" class="">
+                    <button class=" p-5 mt-0 
+                    text-decoration-none link_menu btn_logout">
+                        Sair de lola@gmail.com
+                    </button>
+                </form>
             </div>
     </div>
 
     <!-- LOGIN -->
-    <div class="modal fade" id="modal_login" tabindex="-1">
+    <!-- <div class="modal fade" id="modal_login" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content p-3">
 
-                <!-- Erros de Login e Cadastro -->
+                Erros de Login e Cadastro
                 <jet-validation-errors class="mb-4" />
 
-                <form @submit.prevent="login">
+                <div v-if="status" class="alert alert-success mb-3 rounded-0" role="alert">
+                    {{ status }}
+                </div>
 
+                <form @submit.prevent="login">
+                    
                     <div class="mb-3">
                         <div>
                             <label for="email_login">Email:</label>
@@ -100,10 +104,10 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- CADASTRO -->
-    <div class="modal fade" id="modal_registro">
+    <!-- <div class="modal fade" id="modal_registro">
         <div class="modal-dialog modal-lg">
             <div class="modal-content p-3">
 
@@ -139,11 +143,12 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script>
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import Button from './Button.vue';
 
 export default {
     components:{
@@ -156,52 +161,28 @@ export default {
                 return store.state.value;
             }
     },
-    // DADOS RETORNADOS
-    data(){
-        return {
-            form: this.$inertia.form({
-                email: "",
-                password: ""
-            }),
-            
-        }
-    },
-
-    // FUNÇÕES PRINCIPAIS
     methods:{
-        login: function(){
-            this.form.transform(data => ({
-                        ... data,
-                        remember: this.form.remember ? 'on' : ''
-                    }))
-                    .post(this.route('login'), {
-                        onFinish: () => this.form.reset('password'),
-                    })
+        logout() {
+            this.$inertia.post(route('logout'));
         },
-        cadastro: async function()
-        {
-            await axios.post("api/cadastro/start", {}).then((res) => {
-
-            });
-        }
-    },
-
-    // METODO DE ENTRADA
-    mounted(){
-        // axios.get("api/logged").then((res) => {
-        //     console.log(res);
-        // })
-    },
-    props: {
-        canResetPassword: Boolean,
-        auth: Object,
-        nivel: Number,
-        canLogin: Boolean,
-        canRegister: Boolean,
     }
 }
 </script>
 
 <style>
-
+.box_btn_out
+{
+    margin-top: -50px;
+}
+.btn_logout
+{
+    background: #198754;
+    border: 0;
+    outline: 0;
+    margin-top: -40px;
+}
+.btn_logout:hover
+{
+    background: #fff;
+}
 </style>
