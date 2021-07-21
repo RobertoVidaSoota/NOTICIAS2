@@ -5,29 +5,29 @@
           Cadastrar Noticia
       </h1>
 
-      <div class="card col-10 mt-2 m-auto">
+      <div class="card col-10 mt-2 m-auto p-3">
           <!-- FORMULÁRIO -->
-          <form>
+          <form v-on:submit.prevent="cadastrar">
               
-              <div class="row">
-                  <!-- CAMPO TÍTULO -->
-                  <div class="col-10 m-auto">
+              <div class="row mb-3">
+                <!-- CAMPO TÍTULO -->
+                  <div class="col-10 m-auto mb-3">
                       <div>
                           <label for="not-titulo">Título:</label>
                       </div>
                       <input v-model="not_titulo" type="text" placeholder="Título da Notícia" id="not-titulo"
                       class="form-control" required>
                   </div>
-
-                  <div class="col-10 m-auto">
+                <!-- CAMPO IMAGEM -->
+                  <div class="col-10 m-auto mb-3">
                       <div>
                           <label for="not-link-img">Imagem:</label>
                       </div>
-                      <input v-model="not_link_img" type="url" placeholder="Link da Imagem" id="not-link-img"
+                      <input v-model="not_img_link" type="url" placeholder="Link da Imagem" id="not-link-img"
                       class="form-control" required>
                   </div>
-
-                  <div class="col-10 m-auto">
+                <!-- CAMPO CONTEUDO -->
+                  <div class="col-10 m-auto mb-3">
                       <div>
                           <label for="not-conteudo">Conteudo:</label>
                       </div>
@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import store from "../store";
+
 export default {
     components:{
 
@@ -58,24 +60,43 @@ export default {
     data()
     {
         return {
+            fk: "",
             not_titulo: "",
             not_img_link: "",
             not_conteudo: "",
         }
     },
     methods:{
+        // CADASTRAR USUÁRIO
         cadastrar: function()
         {
-            axios.get("api/store", {
+            axios.post("api/noticia", {
                 titulo: this.not_titulo,
-                imagem: this.not_titulo,
-                conteudo: this.not_conteudo
+                link_imagem: this.not_img_link,
+                conteudo_total: this.not_conteudo,
+                fk_id_users: this.fk
             }).then((res) => {
                 if(res.data.success)
                 {
-                    location.href(this.route("/inicio"));
+                    console.log(res.data.success)
+                    // location.href(this.route("/inicio"));
+                }else{
+                    console.log(res.data)
                 }
             })
+        }
+    },
+    mounted()
+    {
+        axios.get("api/user/logged").then(response => {
+                this.fk = response.data.user.id
+        });
+    },
+    computed:
+    {
+        user()
+        {
+            return store.state.value;
         }
     }
 }

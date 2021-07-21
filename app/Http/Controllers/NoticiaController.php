@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Noticias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class NoticiaController extends Controller
 {
     // LÓGICA DAS ROTAS
     public function __construct()
     {   
-        $this->middleware("auth:api", ["except" => ["index", "show"]]);
+        $this->middleware("auth:sanctum", ["except" => ["index", "show"]]);
     }
     
     // PEGAR TODAS AS NOTICIAS E MANDAR-LAS PRO INICIO
@@ -31,11 +32,20 @@ class NoticiaController extends Controller
     // CADASTRAR NOTICIA NA ÁREA DE EDITOR
     public function store(Request $request)
     {
-        $noticia = Noticias::create($request->all());
-
-        if($noticia)
+        if($request)
         {
-            return response()->json($noticia);
+            $noticia = Noticias::create($request->all());
+            if($noticia)
+            {
+                return response()->json(["success" => true]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                "success" => false,
+                $request
+            ]);
         }
 
         return response()->json([

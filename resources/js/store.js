@@ -10,11 +10,11 @@ export default createStore({
         setUserState: (state, value) => state.value = value 
     }, 
     actions: {
-        userStateAction: ({commit}) => {
-            axios.get("api/logged").then(response => {
-                console.log(response.data)
+        userStateAction: (Ct) => {
+            axios.get("api/user/logged").then(response => {
+                console.log(response)
                 const userLogged = response.data.user;
-                commit('setUserState', userLogged);
+                CT.commit('setUserState', userLogged);
             });
         }
     },
