@@ -1,9 +1,8 @@
 <template>
   
-  <div class="container">
+  <div class="container d-flex justify-content-center align-items-center h_100">
 
-    <div class="card col-sm-8 p-5 m-auto absolute 
-    left-0 top-0 right-0 bottom-0">
+    <div class="card col-sm-8 p-5">
         <!-- Erros de Login e Cadastro -->
             <jet-validation-errors class="mb-4" />
 
@@ -11,8 +10,9 @@
                 {{ status }}
             </div>
 
+        <!-- FORMULÁRIO -->
             <form @submit.prevent="login">
-                
+                <!-- CAMPO E-MAIL -->
                 <div class="mb-3">
                     <div>
                         <label for="email_login">Email:</label>
@@ -20,7 +20,7 @@
                     <input type="email" id="email_login" class="form-control"
                     v-model="form.email" required>
                 </div>
-
+                <!-- CAMPO SENHA -->
                 <div class="mb-3">
                     <div>
                         <label for="senha_login">Senha:</label>
@@ -28,18 +28,26 @@
                     <input type="password" id="senha_login" class="form-control"
                     v-model="form.password" required>
                 </div>
-
+                <!-- BOTÃO DE EVIAR -->
                 <div class="mb-3">
                     <button type="submit" class="btn btn-success">
                         Enviar
                     </button>
                 </div>
-
+                <!-- BOTÃO DE CONTINUAR CONECTADO -->
                 <div class="d-flex mb-3">
-                    <input type="checkbox" v-model="form.remember">
-                    <span>
-                        lembrar de mim
-                    </span>
+
+                    <div class="row">
+                        <div class="col-2">
+                            <input type="checkbox" v-model="form.remember">
+                        </div>
+
+                        <div class="col-10">
+                            <span class="">
+                                lembrar de mim
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>      
@@ -96,5 +104,7 @@ export default {
 </script>
 
 <style>
-
+.h_100{
+    height: 100vh;
+}
 </style>

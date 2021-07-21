@@ -15,14 +15,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
@@ -38,6 +38,12 @@ Route::middleware(['auth:sanctum', 'verified', 'editor'])->group(function () {
         ]);
     })->name('area-editor');
 
+    Route::get('cadastrar-noticia', function(){
+        return Inertia::render('CadastrarNoticia', [
+            'canLogin' => Route::has('login')
+        ]);
+    })->name('cadastrar.noticia');
+
     Route::get('/dashboard', function(){
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -50,7 +56,7 @@ Route::get('entrar', function () {
     ]);
 })->name('entrar');
 
-Route::get('/inicio', function () {
+Route::get('/', function () {
     return Inertia::render('Inicio', [
         'canLogin' => Route::has('login')
     ]);
