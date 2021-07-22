@@ -11,7 +11,7 @@
                     style="background-image: url('https://images.freeimages.com/images/large-previews/4a1/on-the-road-5-1384802.jpg')">
                         <div class="trans_img"></div>
 
-                        <inertia-link :href="route('completa')" class="link_noticia text-decoration-none text-light fs-2 text-center position-absolute bottom-0 start-0 w-100">
+                        <inertia-link :href="route('completa', 1)" class="link_noticia text-decoration-none text-light fs-2 text-center position-absolute bottom-0 start-0 w-100">
                             Noticia Completa (EXEMPLO)
                         </inertia-link>
                   </div>
@@ -29,7 +29,7 @@
                     <img :src="not.link_imagem" 
                     class="w-100">
 
-                        <inertia-link :href="route('completa')" class="link_noticia text-decoration-none text-light fs-2 text-center position-absolute bottom-0 start-0 w-100">
+                        <inertia-link :href="route('completa', not.id)" class="link_noticia text-decoration-none text-light fs-2 text-center position-absolute bottom-0 start-0 w-100">
                             {{ not.titulo }}
                         </inertia-link>
                   </div>

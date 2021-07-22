@@ -74,7 +74,7 @@ Route::get('/assuntos', function () {
     ]);
 })->name('assuntos');
 
-Route::get('/noticia-completa', function(){
+Route::get('/noticia-completa/{id}', function(){
     return Inertia::render('NoticiaCompleta', [
         'canLogin' => Route::has('login')
     ]);

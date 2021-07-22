@@ -24,10 +24,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('/user/logged', [UserController::class, "me"])->name("me");
 });
 
-Route::middleware(['api'])->group(function(){
-    // ROTA DAS NOTICIAS
-    Route::resource('noticia', NoticiaController::class);
 
-    // ROTA DOS COMENTARIOS SOBRE AS NOTICIAS
-    Route::resource('comentario', ComentarioController::class);
-});
+// ROTA DAS NOTICIAS
+Route::resource('noticia', NoticiaController::class);
+
+// ROTA DOS COMENTARIOS SOBRE AS NOTICIAS
+Route::resource('comentario', ComentarioController::class);
