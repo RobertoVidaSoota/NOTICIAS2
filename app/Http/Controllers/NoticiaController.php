@@ -21,10 +21,14 @@ class NoticiaController extends Controller
 
         if($noticia)
         {
-            return response()->json($noticia);
+            return response()->json([
+                "success" => true,
+                $noticia
+            ]);
         }
 
         return response()->json([
+            "success" => false,
             "error" => "Não Autorizado"
         ], 401);
     }

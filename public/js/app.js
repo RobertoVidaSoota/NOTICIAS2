@@ -19260,10 +19260,10 @@ __webpack_require__.r(__webpack_exports__);
         conteudo_total: this.not_conteudo,
         fk_id_users: this.fk
       }).then(function (res) {
-        if (res.data.success) {// location.href(this.route("/inicio"));
+        if (res.data.success) {
+          location.href = _this.route("area-editor");
         } else {
           _this.erros = res.data.error;
-          console.log(_this.erros);
         }
       });
     }
@@ -19431,10 +19431,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     JetMenu: _Jetstream_Menu__WEBPACK_IMPORTED_MODULE_0__.default
-  } // // METODO DE ENTRADA
-  // mounted: {
-  // }
+  },
+  data: function data() {
+    return {
+      noticias_inicio: []
+    };
+  },
+  // METODO DE ENTRADA
+  mounted: function mounted() {
+    var _this = this;
 
+    // CARREGAR TODAS AS NOTICIAS DA PRIMEIRA PÁGINA
+    axios.get("api/noticia").then(function (res) {
+      _this.noticias_inicio = res.data[0];
+    });
+  }
 });
 
 /***/ }),
@@ -23523,7 +23534,7 @@ var _hoisted_2 = {
   "class": "row"
 };
 var _hoisted_3 = {
-  "class": "col-md-6 col-12"
+  "class": "col-lg-6 col-12 mb-5"
 };
 var _hoisted_4 = {
   "class": "box_news mx-auto card bg-dark"
@@ -23541,7 +23552,20 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Noticia Completa ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Noticia Completa (EXEMPLO) ");
+
+var _hoisted_8 = {
+  "class": "box_news mx-auto card bg-dark"
+};
+var _hoisted_9 = {
+  "class": "img_div position-relative"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "trans_img"
+}, null, -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_menu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-menu");
@@ -23560,7 +23584,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])])])])])])], 64
+  , ["href"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PARTE DO SISTEMA "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.noticias_inicio, function (not, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      "class": "col-lg-6 col-12 mb-5",
+      key: key
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" CARD DA NOTICIA "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+      src: not.link_imagem,
+      "class": "w-100"
+    }, null, 8
+    /* PROPS */
+    , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+      href: _ctx.route('completa'),
+      "class": "link_noticia text-decoration-none text-light fs-2 text-center position-absolute bottom-0 start-0 w-100"
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(not.titulo), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["href"])])])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -29838,7 +29888,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.box_news{\r\n       width: 500px;\r\n       height: 370px;\n}\n.trans_img{\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    background-image: linear-gradient(to top,\r\n        rgba(022, 022, 022, 0.4),\r\n        rgba(022, 022, 022, 0.2)\r\n    );\r\n\r\n    z-index: 2;\n}\n.img_div\r\n    {\r\n        position: relative;\r\n        height: 100%;\r\n        width: 100%;\r\n\r\n        background-size: cover;\r\n        background-position: center;\r\n        z-index: 1;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.box_news{\r\n       width: 500px;\r\n       height: 370px;\n}\n.trans_img{\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    background-image: linear-gradient(to top,\r\n        rgba(022, 022, 022, 0.4),\r\n        rgba(022, 022, 022, 0.2)\r\n    );\r\n\r\n    z-index: 2;\n}\n.img_div\r\n    {\r\n        position: relative;\r\n        height: 100%;\r\n        width: 100%;\r\n\r\n        background-size: cover;\r\n        background-position: center;\r\n        z-index: 1;\n}\n.img_div > img\r\n    {\r\n        height: 100%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

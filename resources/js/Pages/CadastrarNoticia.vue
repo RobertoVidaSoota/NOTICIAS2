@@ -86,11 +86,10 @@ export default {
             }).then((res) => {
                 if(res.data.success)
                 {
-                    // location.href(this.route("/inicio"));
+                    location.href = this.route("area-editor");
                 }
                 else{
                     this.erros = res.data.error
-                    console.log(this.erros);
                 }
             })
         }
