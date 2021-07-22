@@ -21,14 +21,14 @@ class Noticias extends Model
         "fk_id_users"
     ];
 
-    public function rules()
-    {
-        return[
-            "titulo" => ["required", "string"],
-            "link_imagem" => ["required", "url"],
-            "conteudo_total" => ["required", "string"]
-        ];
-    }
+    // public function rules()
+    // {
+    //     return[
+    //         "titulo" => ["required", "string"],
+    //         "link_imagem" => ["required", "url"],
+    //         "conteudo_total" => ["required", "string"]
+    //     ];
+    // }
 
     public function user()
 	{

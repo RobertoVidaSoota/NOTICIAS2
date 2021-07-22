@@ -1,10 +1,6 @@
 <template>
     <div class="alert alert-danger text-sm p-2" role="alert" v-if="hasErrors">
-        <div class="font-weight-bold">Whoops! Something went wrong.</div>
-
-        <ul>
-            <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
-        </ul>
+            <b v-for="(error, key) in errors" :key="key">{{ error }}</b>
     </div>
 </template>
 
@@ -12,11 +8,14 @@
     export default {
         computed: {
             errors() {
-                return this.$page.props.errors
+                var e = this.$page.props.errors;
+                var errorOne = e[Object.keys(e)[0]];
+                return errorOne;
+
             },
 
             hasErrors() {
-                return Object.keys(this.errors).length > 0;
+                return this.erros
             },
         }
     }

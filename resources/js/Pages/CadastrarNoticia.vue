@@ -8,6 +8,12 @@
       <div class="card col-10 mt-2 m-auto p-3">
           <!-- FORMULÁRIO -->
           <form v-on:submit.prevent="cadastrar">
+
+              <div class="row mb-3" v-if="erros">
+                  <div class="alert alert-danger">
+                      <b>{{ erros }}</b>
+                  </div>
+              </div>
               
               <div class="row mb-3">
                 <!-- CAMPO TÍTULO -->
@@ -16,7 +22,7 @@
                           <label for="not-titulo">Título:</label>
                       </div>
                       <input v-model="not_titulo" type="text" placeholder="Título da Notícia" id="not-titulo"
-                      class="form-control" required>
+                      class="form-control" >
                   </div>
                 <!-- CAMPO IMAGEM -->
                   <div class="col-10 m-auto mb-3">
@@ -24,7 +30,7 @@
                           <label for="not-link-img">Imagem:</label>
                       </div>
                       <input v-model="not_img_link" type="url" placeholder="Link da Imagem" id="not-link-img"
-                      class="form-control" required>
+                      class="form-control" >
                   </div>
                 <!-- CAMPO CONTEUDO -->
                   <div class="col-10 m-auto mb-3">
@@ -52,10 +58,11 @@
 
 <script>
 import store from "../store";
+// import JetValidationErrors from '@/Jetstream/ValidationErrors'
 
 export default {
     components:{
-
+        // JetValidationErrors
     },
     data()
     {
@@ -64,6 +71,7 @@ export default {
             not_titulo: "",
             not_img_link: "",
             not_conteudo: "",
+            erros: ""
         }
     },
     methods:{
@@ -78,10 +86,11 @@ export default {
             }).then((res) => {
                 if(res.data.success)
                 {
-                    console.log(res.data.success)
                     // location.href(this.route("/inicio"));
-                }else{
-                    console.log(res.data)
+                }
+                else{
+                    this.erros = res.data.error
+                    console.log(this.erros);
                 }
             })
         }
@@ -92,12 +101,8 @@ export default {
                 this.fk = response.data.user.id
         });
     },
-    computed:
-    {
-        user()
-        {
-            return store.state.value;
-        }
+    props:{
+        // erros: Object
     }
 }
 </script>
