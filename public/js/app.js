@@ -19321,6 +19321,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     JetMenu: _Jetstream_Menu__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      dados: [],
+      dados_noticia_temp: [],
+      dados_noticia: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // axios.get("http://127.0.0.1:8000/api/noticia").then((res) => {
+    //     this.dados_noticia.push(res.data[0])
+    //     console.log(this.dados_noticia[0])
+    // });
+    axios.get("http://127.0.0.1:8000/api/comentario").then(function (res) {
+      _this.dados.push(res.data.comentarios);
+
+      console.log(_this.dados[0]);
+
+      for (var i = 0; i < _this.dados[0].length; i++) {
+        _this.dados_noticia.push(res.data.comentarios[i].noticia);
+      }
+
+      console.log(_this.dados_noticia);
+    });
   }
 });
 
@@ -19484,8 +19510,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.titulo = _this.dados.titulo;
       _this.conteudo = _this.dados.conteudo_total;
     });
-  },
-  props: {}
+  }
 });
 
 /***/ }),
@@ -23358,31 +23383,22 @@ var _hoisted_1 = {
   "class": "container mt-5"
 };
 var _hoisted_2 = {
-  "class": "comentarios card bg-light mb-2"
-};
-var _hoisted_3 = {
   "class": "card-header"
 };
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "display-4 fw-bold"
 };
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Noticia completa ");
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_4 = {
   "class": "box_img_coment"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "img_coment",
-  style: {
-    "background-image": "url('https://images.freeimages.com/images/large-previews/4a1/on-the-road-5-1384802.jpg')"
-  }
-})], -1
-/* HOISTED */
-);
+};
+var _hoisted_5 = {
+  key: 0,
+  "class": "card-header"
+};
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card-header\"><div class=\"row mb-2\"><!-- autofocus --><div class=\"col-sm-3 col-12\"><input type=\"text\" placeholder=\"Nome\" class=\"form-control\"></div><div class=\"col-sm-7 col-12\"><input type=\"text\" placeholder=\"Comentário\" class=\"form-control\"></div><div class=\"col-sm-2 col-12\"><button class=\"btn btn-success btn-small\"> Confirmar </button></div></div></div>", 1);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row mb-2\"><div class=\"col-sm-3 col-12\"><input type=\"text\" placeholder=\"Nome\" class=\"form-control\"></div><div class=\"col-sm-7 col-12\"><input type=\"text\" placeholder=\"Comentário\" class=\"form-control\"></div><div class=\"col-sm-2 col-12\"><button class=\"btn btn-success btn-small\"> Confirmar </button></div></div>", 1);
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "card-header"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, "Nome de Usuario"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "comentario"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "#",
@@ -23398,19 +23414,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-    href: _ctx.route('completa'),
-    "class": "text-success"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_5];
-    }),
-    _: 1
-    /* STABLE */
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"comentarios card bg-light mb-2\">\r\n\r\n            <div class=\"card-header\">\r\n                <h2 class=\"display-4 fw-bold\">\r\n                    <inertia-link :href=\"route('completa', '1')\" class=\"text-success\">\r\n                        Noticia completa\r\n                    </inertia-link>\r\n                </h2>\r\n                \r\n                <div class=\"box_img_coment\">\r\n                    <div class=\"img_coment\"\r\n                    style=\"background-image: url('https://images.freeimages.com/images/large-previews/4a1/on-the-road-5-1384802.jpg')\"></div>\r\n                </div>\r\n            </div>\r\n\r\n            FORMULARIO DE COMENTARIO\r\n            <div class=\"card-header\">\r\n                <div class=\"row mb-2\">\r\n\r\n                    autofocus\r\n                    <div class=\"col-sm-3 col-12\">\r\n                        <input type=\"text\" placeholder=\"Nome\" class=\"form-control\"\r\n                        >\r\n                    </div>\r\n                    <div class=\"col-sm-7 col-12\">\r\n                        <input type=\"text\" placeholder=\"Comentário\" class=\"form-control\"\r\n                         >\r\n                    </div>\r\n\r\n                    <div class=\"col-sm-2 col-12\">\r\n                        <button class=\"btn btn-success btn-small\">\r\n                             Confirmar\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            COMENTARIO PUBLICADO\r\n            <div class=\"card-header\">\r\n                <h3>Nome de Usuario</h3>\r\n                <p>comentario</p>\r\n\r\n                <small>\r\n                    <a href=\"#\" class=\"text-secondary\" \r\n                    data-bs-target=\"#form-resposta\" data-bs-toggle=\"modal\">\r\n                    responder\r\n                    </a>\r\n                </small>\r\n            </div>\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PARTE DINÂMICA "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.dados_noticia, function (noticia, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      key: key,
+      "class": "comentarios card bg-light mb-2"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+      href: _ctx.route('completa', '1'),
+      "class": "text-success"
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(noticia.titulo), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
 
-  }, 8
-  /* PROPS */
-  , ["href"])]), _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" FORMULARIO DE COMENTARIO "), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" COMENTARIO PUBLICADO "), _hoisted_8])])], 64
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"img_coment\"\r\n                    style=\"background-image: url('https://images.freeimages.com/images/large-previews/4a1/on-the-road-5-1384802.jpg')\"></div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+      src: noticia.link_imagem
+    }, null, 8
+    /* PROPS */
+    , ["src"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" FORMULARIO DE COMENTARIO "), _ctx.$page.props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, [_hoisted_6])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" COMENTARIO PUBLICADO "), _hoisted_7]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -23706,7 +23735,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ASSUNTO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-    href: _ctx.route('completa'),
+    href: _ctx.route('completa', '1'),
     "class": "text-success text-decoration-none"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

@@ -22,7 +22,7 @@ class Comentarios extends Model
 
     public function noticia()
 	{
-		return $this->belongsTo(Noticia::class, 'fk_id_noticias');
+		return $this->belongsTo(Noticias::class, 'fk_id_noticias');
 	}
 
     public function user()

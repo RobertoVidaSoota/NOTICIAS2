@@ -3,24 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentarios;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
     // LÓGICA DAS ROTAS
-    // public function __construct()
-    // {   
-    //     $this->middleware("auth:api");
-    // }
+    public function __construct()
+    {   
+        $this->middleware("auth:sanctum")->except(["index"]);
+    }
     
     // BUSCAR TODOS OS COMENTÁRIOS DE UMA NOTICIA
     public function index()
     {
-        $comentario = Comentarios::with("noticias")->orderBy("id", "desc")->get();
+        $comentario = Comentarios::with(["noticia", "user"])
+            ->orderBy("id", "desc")
+            ->get();
 
         if($comentario)
         {
-            return response()->json($comentario);
+            return response()->json([
+                "success" => true,
+                "comentarios" => $comentario
+            ]);
+
+        }elseif(count($comentario))
+        {
+            return response()->json([
+                "success" => false,
+            ]);
         }
 
         return response()->json([

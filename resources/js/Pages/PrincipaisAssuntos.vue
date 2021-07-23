@@ -7,7 +7,7 @@
             <!-- ASSUNTO -->
             <div class="card_assunto card bg-light p-3">
                 <h1 class="display-1 fw-bolder">
-                    <inertia-link :href="route('completa')" 
+                    <inertia-link :href="route('completa', '1')" 
                     class="text-success text-decoration-none">
                             Noticia Completa
                     </inertia-link>

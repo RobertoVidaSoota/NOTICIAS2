@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
 // ROTA DAS NOTICIAS
 Route::resource('noticia', NoticiaController::class);
+Route::get('noticia-fuc/comentario', [NoticiaController::class, "getNoticiaComents"])->name("noticia-fuc");
 
 // ROTA DOS COMENTARIOS SOBRE AS NOTICIAS
 Route::resource('comentario', ComentarioController::class);

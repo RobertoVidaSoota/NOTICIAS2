@@ -36,9 +36,6 @@ export default {
             this.titulo = this.dados.titulo
             this.conteudo = this.dados.conteudo_total
         });
-    },
-    props:{
-        
     }
 }
 </script>
