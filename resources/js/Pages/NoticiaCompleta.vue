@@ -2,12 +2,12 @@
   <jet-menu />
 
   <h1 class="text-center display-1 fw-bold">
-      <!-- {{ titulo }} -->
+      {{ titulo }}
   </h1>
 
-  <div class="container">
+  <div class="container mt-5">
       <p class="text-center">
-         <!-- {{ conteudo }}      -->
+         {{ conteudo }}     
       </p>
   </div>
 </template>
@@ -31,9 +31,10 @@ export default {
     // FUNÇÃO DE ENTRADA
     mounted()
     {
-        axios.get("api/noticia/"+this.id_user).then((res) => {
-            this.dados = res.data
-            // console.log(this.dados)
+        axios.get("http://127.0.0.1:8000/api/noticia/"+this.id_user).then((res) => {
+            this.dados = res.data[0]
+            this.titulo = this.dados.titulo
+            this.conteudo = this.dados.conteudo_total
         });
     },
     props:{
