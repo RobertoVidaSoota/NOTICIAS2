@@ -4,20 +4,6 @@
   <div class="container mt-5">
       <div class="row">
 
-          <div class="col-lg-6 col-12 mb-5">
-              <!-- CARD DA NOTICIA -->
-              <div class="box_news mx-auto card bg-dark">
-                  <div class="img_div position-relative"
-                    style="background-image: url('https://images.freeimages.com/images/large-previews/4a1/on-the-road-5-1384802.jpg')">
-                        <div class="trans_img"></div>
-
-                        <inertia-link :href="route('completa', 1)" class="link_noticia text-decoration-none text-light fs-2 text-center position-absolute bottom-0 start-0 w-100">
-                            Noticia Completa (EXEMPLO)
-                        </inertia-link>
-                  </div>
-              </div>
-          </div>
-
         <!-- PARTE DO SISTEMA -->
           <div class="col-lg-6 col-12 mb-5" 
           v-for="(not, key) in noticias_inicio" :key="key">

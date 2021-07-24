@@ -17,9 +17,9 @@ class ComentarioController extends Controller
     // BUSCAR TODOS OS COMENTÁRIOS DE UMA NOTICIA
     public function index()
     {
-        $comentario = Comentarios::with(["noticia", "user"])
-            ->orderBy("id", "desc")
-            ->get();
+        $comentario = Comentarios::with(["user", "noticia"])
+        ->orderBy("fk_id_noticias")
+        ->get();
 
         if($comentario)
         {
