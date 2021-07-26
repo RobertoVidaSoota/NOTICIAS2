@@ -31,6 +31,7 @@ export default {
     // FUNÇÃO DE ENTRADA
     mounted()
     {
+        // PEGAR OS DADOS DA NOTICIA PELO ID
         axios.get("http://127.0.0.1:8000/api/noticia/"+this.id_user).then((res) => {
             this.dados = res.data[0]
             this.titulo = this.dados.titulo

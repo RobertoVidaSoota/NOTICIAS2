@@ -19340,8 +19340,6 @@ __webpack_require__.r(__webpack_exports__);
     // PEGAR TODOS OS CAMENTARIOS MAIS RELEVANTES
     axios.get("http://127.0.0.1:8000/api/comentario").then(function (res) {
       _this.dados_comentarios.push(res.data.comentarios);
-
-      console.log(_this.dados_comentarios[0]);
     }); // PEGAR ID DO USUÁRIO LOGADO
 
     axios.get("api/user/logged").then(function (response) {
@@ -19523,6 +19521,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    // PEGAR OS DADOS DA NOTICIA PELO ID
     axios.get("http://127.0.0.1:8000/api/noticia/" + this.id_user).then(function (res) {
       _this.dados = res.data[0];
       _this.titulo = _this.dados.titulo;
@@ -19549,6 +19548,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     JetMenu: _Jetstream_Menu__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      response: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // PEGAR INFORMAÇÃO ADICIONAL
+    axios.get("http://127.0.0.1:8000/api/noticia").then(function (res) {
+      for (var i = 0; i < res.data[0].length; i++) {
+        if (res.data[0][i].informacao_adicional !== null) {
+          _this.response.push(res.data[0][i]);
+        }
+      }
+
+      console.log(_this.response);
+    });
   }
 });
 
@@ -23740,7 +23758,7 @@ var _hoisted_2 = {
   "class": "group_list"
 };
 var _hoisted_3 = {
-  "class": "card_assunto card bg-light p-3"
+  "class": "card_assunto card bg-light p-3 mb-3"
 };
 var _hoisted_4 = {
   "class": "display-1 fw-bolder"
@@ -23748,6 +23766,9 @@ var _hoisted_4 = {
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Noticia Completa ");
 
+var _hoisted_6 = {
+  "class": "display-1 fw-bolder"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_menu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-menu");
 
@@ -23765,7 +23786,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])])])])])], 64
+  , ["href"])])]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.response, function (p, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      "class": "card_assunto card bg-light p-3 mb-3",
+      key: key
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+      href: _ctx.route('completa', p.id),
+      "class": "text-success text-decoration-none"
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(p.informacao_adicional), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["href"])])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])], 64
   /* STABLE_FRAGMENT */
   );
 }

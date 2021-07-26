@@ -79,7 +79,6 @@ export default {
         // PEGAR TODOS OS CAMENTARIOS MAIS RELEVANTES
         axios.get("http://127.0.0.1:8000/api/comentario").then((res) => {
             this.dados_comentarios.push(res.data.comentarios)
-            console.log(this.dados_comentarios[0])
         });
 
         // PEGAR ID DO USUÁRIO LOGADO
