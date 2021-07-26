@@ -68,7 +68,6 @@ export default {
             // DADOS BUSCADOS
             dados_comentarios: [],
             erros: "",
-            response_form: [],
             // DADOS PARA ENVIAR
             texto_comentario: "",
             fk: "",
@@ -98,7 +97,6 @@ export default {
                 fk_id_users: this.fk,
                 fk_id_noticias: this.fk_noticia
             }).then((res) => {
-                console.log(this.response_form);
                 if(res.data.success)
                 {
                     location.reload();

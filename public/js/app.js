@@ -19328,7 +19328,6 @@ __webpack_require__.r(__webpack_exports__);
       // DADOS BUSCADOS
       dados_comentarios: [],
       erros: "",
-      response_form: [],
       // DADOS PARA ENVIAR
       texto_comentario: "",
       fk: "",
@@ -19359,8 +19358,6 @@ __webpack_require__.r(__webpack_exports__);
         fk_id_users: this.fk,
         fk_id_noticias: this.fk_noticia
       }).then(function (res) {
-        console.log(_this2.response_form);
-
         if (res.data.success) {
           location.reload();
         } else {

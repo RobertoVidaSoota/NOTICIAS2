@@ -20,7 +20,7 @@ class ComentarioController extends Controller
     public function index()
     {
         $comentario = Comentarios::with(["user", "noticia"])
-        ->orderBy("fk_id_noticias")
+        ->orderBy("id", "desc")
         ->get();
 
         if($comentario)
@@ -61,13 +61,12 @@ class ComentarioController extends Controller
         }else
         {
             $id_noticia = $request->fk_id_noticias;
-            $pegar_noticia = Noticias::findOrFail($id_noticia);
 
-            if(!$pegar_noticia)
+            if(!Noticias::find($id_noticia))
             {
                 return response()->json([
                     "success" => false,
-                    "error" => "Notícia não encontrada."
+                    "error" => "Notícia não encontrada, informe outro ID."
                 ]);
             }
             
