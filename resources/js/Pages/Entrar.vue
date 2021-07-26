@@ -1,8 +1,13 @@
 <template>
-  
+    
   <div class="container d-flex justify-content-center align-items-center h_100">
 
     <div class="card col-sm-8 p-5">
+
+        <inertia-link :href="route('inicio')" class="mt-5">
+           voltar para o inicio
+        </inertia-link>
+        
         <!-- Erros de Login e Cadastro -->
             <jet-validation-errors class="mb-4" />
 
@@ -29,10 +34,19 @@
                     v-model="form.password" required>
                 </div>
                 <!-- BOTÃO DE EVIAR -->
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success">
-                        Enviar
-                    </button>
+                <div class="mb-3 row">
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-success">
+                            Enviar
+                        </button>
+                    </div>
+                    <div class="col-3">
+                        <inertia-link class=""
+                        :href="route('registrar')">
+                            Criar conta
+                        </inertia-link>
+                    </div>
+                    
                 </div>
                 <!-- BOTÃO DE CONTINUAR CONECTADO -->
                 <div class="d-flex mb-3">
@@ -53,6 +67,8 @@
         </div>      
   </div>
 </template>
+
+
 
 <script>
 
@@ -104,7 +120,5 @@ export default {
 </script>
 
 <style>
-.h_100{
-    height: 100vh;
-}
+
 </style>

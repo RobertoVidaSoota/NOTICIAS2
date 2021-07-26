@@ -5,6 +5,10 @@
           Cadastrar Noticia
       </h1>
 
+      <inertia-link :href="route('inicio')">
+           voltar para o inicio
+      </inertia-link>
+
       <div class="card col-10 mt-2 m-auto p-3">
           <!-- FORMULÁRIO -->
           <form v-on:submit.prevent="cadastrar">
