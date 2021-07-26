@@ -5,14 +5,14 @@
 
         <div class="group_list">
             <!-- ASSUNTO -->
-            <div class="card_assunto card bg-light p-3 mb-3">
+            <!-- <div class="card_assunto card bg-light p-3 mb-3">
                 <h1 class="display-1 fw-bolder">
                     <inertia-link :href="route('completa', '1')" 
                     class="text-success text-decoration-none">
                             Noticia Completa
                     </inertia-link>
                 </h1>
-            </div>
+            </div> -->
 
             <div class="card_assunto card bg-light p-3 mb-3"
                 v-for="(p, key) in response" :key="key">

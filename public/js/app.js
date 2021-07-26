@@ -19511,10 +19511,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      // DADOS RETORNADOS
       dados: [],
+      res_comentarios: [],
+      // DADOS PARA ENVIAR
       titulo: "",
       conteudo: "",
-      id_user: location.pathname.split("/")[2]
+      id_noticia_cp: location.pathname.split("/")[2]
     };
   },
   // FUNÇÃO DE ENTRADA
@@ -19522,10 +19525,16 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // PEGAR OS DADOS DA NOTICIA PELO ID
-    axios.get("http://127.0.0.1:8000/api/noticia/" + this.id_user).then(function (res) {
+    axios.get("http://127.0.0.1:8000/api/noticia/" + this.id_noticia_cp).then(function (res) {
       _this.dados = res.data[0];
       _this.titulo = _this.dados.titulo;
       _this.conteudo = _this.dados.conteudo_total;
+    }); // PEGAR TODOS OS COMENTARIOS DA NOTICIA
+
+    axios.get("http://127.0.0.1:8000/api/comentario/" + this.id_noticia_cp).then(function (res) {
+      _this.res_comentarios.push(res.data.coments);
+
+      console.log(_this.res_comentarios);
     });
   }
 });
@@ -23724,6 +23733,15 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "text-center"
 };
+var _hoisted_4 = {
+  "class": "container"
+};
+var _hoisted_5 = {
+  "class": "lista_comentarios mt-5"
+};
+var _hoisted_6 = {
+  "class": "card-header"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_menu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-menu");
 
@@ -23731,7 +23749,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.conteudo), 1
   /* TEXT */
-  )])], 64
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.res_comentarios[0], function (coment, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      key: key,
+      "class": "comentarios card bg-light mb-2"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" COMENTARIO PUBLICADO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(coment.user.name), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(coment.texto_comentario), 1
+    /* TEXT */
+    )])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -23758,15 +23787,6 @@ var _hoisted_2 = {
   "class": "group_list"
 };
 var _hoisted_3 = {
-  "class": "card_assunto card bg-light p-3 mb-3"
-};
-var _hoisted_4 = {
-  "class": "display-1 fw-bolder"
-};
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Noticia Completa ");
-
-var _hoisted_6 = {
   "class": "display-1 fw-bolder"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23774,23 +23794,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ASSUNTO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-    href: _ctx.route('completa', '1'),
-    "class": "text-success text-decoration-none"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_5];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["href"])])]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.response, function (p, key) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ASSUNTO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card_assunto card bg-light p-3 mb-3\">\r\n                <h1 class=\"display-1 fw-bolder\">\r\n                    <inertia-link :href=\"route('completa', '1')\" \r\n                    class=\"text-success text-decoration-none\">\r\n                            Noticia Completa\r\n                    </inertia-link>\r\n                </h1>\r\n            </div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.response, function (p, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": "card_assunto card bg-light p-3 mb-3",
       key: key
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
       href: _ctx.route('completa', p.id),
       "class": "text-success text-decoration-none"
     }, {

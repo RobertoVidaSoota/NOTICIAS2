@@ -86,11 +86,21 @@ class ComentarioController extends Controller
     // PEGAR O COMENTÁRIO COM MAIS DETALHES
     public function show($id)
     {
-        $comentario = Comentarios::find($id);
+        $comentario = Comentarios::with("user")->where("fk_id_noticias", $id)->get();
 
         if($comentario)
         {
-            return response()->json($comentario);
+            return response()->json([
+                "success" => true,
+                "coments" => $comentario
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                "success" => false,
+                "error" => "Ainda não tem comentarios"
+            ]);
         }
 
         return response()->json([
