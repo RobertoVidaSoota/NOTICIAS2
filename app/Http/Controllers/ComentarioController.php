@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentarios;
+use App\Models\Noticias;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ComentarioController extends Controller
 {
@@ -43,11 +45,38 @@ class ComentarioController extends Controller
     // CADASTRAR UM COMENTÁRIO
     public function store(Request $request)
     {
-        $comentario = Comentarios::create($request->all());
+        $val = Validator::make($request->all(), [
+            "texto_comentario" => ["required"],
+            "fk_id_noticias" => ["required", "numeric"]
+        ]);
 
-        if($comentario)
+        if($val->fails())
         {
-            return response()->json(["success" => true]);
+            $msg = $val->getMessageBag()->first();
+
+            return response()->json([
+                "success" => false,
+                "error" => $msg
+            ]);
+        }else
+        {
+            $id_noticia = $request->fk_id_noticias;
+            $pegar_noticia = Noticias::findOrFail($id_noticia);
+
+            if(!$pegar_noticia)
+            {
+                return response()->json([
+                    "success" => false,
+                    "error" => "Notícia não encontrada."
+                ]);
+            }
+            
+            $comentario = Comentarios::create($request->all());
+
+            if($comentario)
+            {
+                return response()->json(["success" => true]);
+            }
         }
 
         return response()->json([

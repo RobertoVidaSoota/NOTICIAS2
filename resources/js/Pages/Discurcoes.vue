@@ -3,27 +3,37 @@
 
     <div class="container mt-5">
 
+        <div class="w-100"
+            v-if="erros">
+            <div class="mx-auto alert alert-danger col-6">
+                <b> {{ erros }} </b>
+            </div>
+        </div>
+
 
         <div v-if="$page.props.user" class="card mb-2">
             <!-- FORMULARIO DE COMENTARIO -->
             <div class="card-header">
-                <div class="row mb-2">
+                <form v-on:submit.prevent="comentar">
+                    <div class="row mb-2">
+                        <!-- O CERTO É FAZER SELECT (sem a rota resource) -->
+                        <div class="col-sm-2 col-12">
+                            <input type="number" placeholder="ID" class="form-control"
+                            v-model="fk_noticia">
+                        </div>
 
-                    <div class="col-sm-3 col-12">
-                        <input type="text" placeholder="Nome" class="form-control"
-                        >
-                    </div>
-                    <div class="col-sm-7 col-12">
-                        <input type="text" placeholder="Comentário" class="form-control"
-                         >
-                    </div>
+                        <div class="col-sm-6 col-12">
+                            <input type="text" placeholder="Comentário" class="form-control"
+                            v-model="texto_comentario">
+                        </div>
 
-                    <div class="col-sm-2 col-12">
-                        <button class="btn btn-success btn-small">
-                             Confirmar
-                        </button>
+                        <div class="col-sm-2 col-12">
+                            <button class="btn btn-success btn-small">
+                                Confirmar
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -55,15 +65,50 @@ export default {
     data()
     {
         return {
-            dados_comentarios: []
+            // DADOS BUSCADOS
+            dados_comentarios: [],
+            erros: "",
+            response_form: [],
+            // DADOS PARA ENVIAR
+            texto_comentario: "",
+            fk: "",
+            fk_noticia: ""
         }
     },
     mounted()
     {
+        // PEGAR TODOS OS CAMENTARIOS MAIS RELEVANTES
         axios.get("http://127.0.0.1:8000/api/comentario").then((res) => {
             this.dados_comentarios.push(res.data.comentarios)
             console.log(this.dados_comentarios[0])
         });
+
+        // PEGAR ID DO USUÁRIO LOGADO
+        axios.get("api/user/logged").then(response => {
+                this.fk = response.data.user.id
+        });
+    },
+    methods:{
+        // ENVIAR COMENTARIO
+        comentar: function()
+        {
+            axios.post("http://127.0.0.1:8000/api/comentario",
+            {
+                texto_comentario: this.texto_comentario,
+                fk_id_users: this.fk,
+                fk_id_noticias: this.fk_noticia
+            }).then((res) => {
+                console.log(this.response_form);
+                if(res.data.success)
+                {
+                    location.reload();
+                }
+                else
+                {
+                    this.erros = res.data.error
+                }
+            });
+        }
     }
 }
 </script>

@@ -19271,6 +19271,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
+    // PEGAR ID DO USUÁRIO LOGADO
     axios.get("api/user/logged").then(function (response) {
       _this2.fk = response.data.user.id;
     });
@@ -19324,17 +19325,49 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      dados_comentarios: []
+      // DADOS BUSCADOS
+      dados_comentarios: [],
+      erros: "",
+      response_form: [],
+      // DADOS PARA ENVIAR
+      texto_comentario: "",
+      fk: "",
+      fk_noticia: ""
     };
   },
   mounted: function mounted() {
     var _this = this;
 
+    // PEGAR TODOS OS CAMENTARIOS MAIS RELEVANTES
     axios.get("http://127.0.0.1:8000/api/comentario").then(function (res) {
       _this.dados_comentarios.push(res.data.comentarios);
 
       console.log(_this.dados_comentarios[0]);
+    }); // PEGAR ID DO USUÁRIO LOGADO
+
+    axios.get("api/user/logged").then(function (response) {
+      _this.fk = response.data.user.id;
     });
+  },
+  methods: {
+    // ENVIAR COMENTARIO
+    comentar: function comentar() {
+      var _this2 = this;
+
+      axios.post("http://127.0.0.1:8000/api/comentario", {
+        texto_comentario: this.texto_comentario,
+        fk_id_users: this.fk,
+        fk_id_noticias: this.fk_noticia
+      }).then(function (res) {
+        console.log(_this2.response_form);
+
+        if (res.data.success) {
+          location.reload();
+        } else {
+          _this2.erros = res.data.error;
+        }
+      });
+    }
   }
 });
 
@@ -23372,12 +23405,37 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 0,
+  "class": "w-100"
+};
+var _hoisted_3 = {
+  "class": "mx-auto alert alert-danger col-6"
+};
+var _hoisted_4 = {
+  key: 1,
   "class": "card mb-2"
 };
+var _hoisted_5 = {
+  "class": "card-header"
+};
+var _hoisted_6 = {
+  "class": "row mb-2"
+};
+var _hoisted_7 = {
+  "class": "col-sm-2 col-12"
+};
+var _hoisted_8 = {
+  "class": "col-sm-6 col-12"
+};
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card-header\"><div class=\"row mb-2\"><div class=\"col-sm-3 col-12\"><input type=\"text\" placeholder=\"Nome\" class=\"form-control\"></div><div class=\"col-sm-7 col-12\"><input type=\"text\" placeholder=\"Comentário\" class=\"form-control\"></div><div class=\"col-sm-2 col-12\"><button class=\"btn btn-success btn-small\"> Confirmar </button></div></div></div>", 1);
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-sm-2 col-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  "class": "btn btn-success btn-small"
+}, " Confirmar ")], -1
+/* HOISTED */
+);
 
-var _hoisted_4 = {
+var _hoisted_10 = {
   "class": "card-header"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23385,11 +23443,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_ctx.$page.props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" FORMULARIO DE COMENTARIO "), _hoisted_3])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PARTE DINÂMICA "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.dados_comentarios[0], function (c, key) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [$data.erros ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.erros), 1
+  /* TEXT */
+  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" FORMULARIO DE COMENTARIO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.comentar && $options.comentar.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" O CERTO É FAZER SELECT (sem a rota resource) "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "number",
+    placeholder: "ID",
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.fk_noticia = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.fk_noticia]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "text",
+    placeholder: "Comentário",
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.texto_comentario = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.texto_comentario]])]), _hoisted_9])], 32
+  /* HYDRATE_EVENTS */
+  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PARTE DINÂMICA "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.dados_comentarios[0], function (c, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: key,
       "class": "comentarios card bg-light mb-2"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" COMENTARIO PUBLICADO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" COMENTARIO PUBLICADO "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
       "class": "text-success",
       href: _ctx.route('completa', c.noticia.id)
     }, {

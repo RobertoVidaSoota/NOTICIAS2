@@ -96,6 +96,7 @@ export default {
     },
     mounted()
     {
+        // PEGAR ID DO USUÁRIO LOGADO
         axios.get("api/user/logged").then(response => {
                 this.fk = response.data.user.id
         });
